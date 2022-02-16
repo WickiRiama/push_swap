@@ -6,7 +6,13 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:53:52 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/15 17:53:54 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/16 17:16:19 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+int ft_parse(int ac, char **av, t_list **pile);
+
+#endif

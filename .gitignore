@@ -9,3 +9,4 @@ main.c
 *.swp
 *.dSYM
 so_long
+push_swap
