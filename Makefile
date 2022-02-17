@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 16:38:50 by mriant            #+#    #+#              #
-#    Updated: 2022/02/16 17:37:50 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/17 16:56:04 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ SRCS = ${addprefix srcs/, \
 	ops.c \
 	parsing.c \
 	push_swap.c}
-OBJS = ${patsubst srcs/%.c, objs/%.o, ${SRCS}}
-DEPS = ${patsubst srcs/%.c, deps/%.d, ${SRCS}}
+OBJS = ${patsubst srcs/%.c, build/%.o, ${SRCS}}
+DEPS = ${patsubst srcs/%.c, build/%.d, ${SRCS}}
 
 CFLAGS = -Wall -Wextra -Werror -g
 IFLAGS = -I./includes -I./libft -MMD
@@ -33,16 +33,15 @@ ${NAME}: ${LIBFT} ${OBJS}
 ${LIBFT}:
 	make -s -C libft
 
-objs/%.o: srcs/%.c
-	@mkdir -p objs
-	@mkdir -p deps
+build/%.o: srcs/%.c
+	@mkdir -p build
 	${CC} ${CFLAGS} -c $< -o $@ ${IFLAGS}
 
 all: ${NAME}
 
 clean:
 	rm -rf ${OBJS} ${DEPS}
-	rm -rf objs deps
+	rm -rf build
 	make -s -C libft clean
 
 fclean: clean

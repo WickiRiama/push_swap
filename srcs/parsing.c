@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:52:59 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/16 17:13:24 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/17 17:36:50 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_checknum(char *s)
 
 int	ft_checkdobble(int n, t_list **pile)
 {
-	t_list *item;
+	t_list	*item;
 
 	item = *pile;
 	while (item)
@@ -43,10 +43,10 @@ int	ft_checkdobble(int n, t_list **pile)
 	return (0);
 }
 
-int ft_parse(int ac, char **av, t_list **pile)
+int	ft_parse(int ac, char **av, t_list **pile)
 {
 	int		i;
-	int		content;
+	int		*content;
 	t_list	*next;
 
 	*pile = NULL;
@@ -57,10 +57,13 @@ int ft_parse(int ac, char **av, t_list **pile)
 	{
 		if (ft_checknum(av[i]) == 1)
 			return (1);
-		content = ft_atoi(av[i]);
-		if (ft_checkdobble(content, pile) == 1)
+		content = malloc(sizeof(int));
+		if (!content)
 			return (1);
-		next = ft_lstnew(&content);
+		*content = ft_atoi(av[i]);
+		if (ft_checkdobble(*content, pile) == 1)
+			return (1);
+		next = ft_lstnew(content);
 		if (!next)
 			return (1);
 		ft_lstadd_back(pile, next);
