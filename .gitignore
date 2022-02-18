@@ -5,7 +5,6 @@
 */*.a
 */*.o
 */*.d
-main.c
 *.swp
 *.dSYM
 so_long

@@ -5,26 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 17:54:27 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/17 17:34:18 by mriant           ###   ########.fr       */
+/*   Created: 2022/02/18 10:58:17 by mriant            #+#    #+#             */
+/*   Updated: 2022/02/18 11:59:59 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void	ft_swap(t_list *lst)
 {
-	t_list	*a_pile;
-	t_list	*b_pile;
+	t_list	*temp;
 
-	a_pile = NULL;
-	(void) b_pile;
-	if (ac < 2 || ft_parse(ac, av, &a_pile) == 1)
-	{
-		ft_fprintf(2, "Error\n");
-		ft_lstclear(&a_pile, free);
-		return (1);
-	}
-	return (0);
+	if (!lst || !lst->next)
+		return ;
+	temp = lst->next;
+	lst->next = temp->next;
+	temp->next = lst;
+	lst = temp;
+}
+
+void	ft_push(t_list *src, t_list *dest)
+{
+	t_list	*temp;
+
+	if (!src)
+		return ;
+	temp = src;
+	src = src->next;
+	temp->next = dest;
+	dest = temp;
+}
+
+void	ft_rotate(t_list *lst)
+{
+	t_list	*temp;
+	t_list	*last;
+
+	if (!lst || !lst->next)
+		return ;
+	temp = lst;
+	last = ft_lstlast(lst);
+	lst = lst->next;
+	last->next = temp;
+	temp->next = NULL;
+}
+
+void	ft_rrotate(t_list *lst)
+{
+	t_list	*temp;
+	t_list	*last;
+
+	if (!lst || !lst->next)
+		return ;
+	last = ft_lstlast(lst);
+	temp = lst;
+	while (temp->next != last)
+		temp = temp->next;
+	temp->next = NULL;
+	last->next = lst;
+	lst = last;
 }
