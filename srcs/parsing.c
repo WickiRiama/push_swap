@@ -6,25 +6,37 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:52:59 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/17 17:36:50 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/18 16:19:04 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-int	ft_checknum(char *s)
+int	ft_checkint(char *s)
 {
-	int	i;
+	int	is_pos;
 
-	i = 0;
-	if (s[i] == '-')
-		i++;
-	while (s[i])
+	if (!s)
+		return (1);
+	while (ft_isspace(*s))
+		s++;
+	is_pos = *s - '-';
+	if (is_pos == -2 || is_pos == 0)
+		s++;
+	while (*s == '0')
+		s ++;
+	if (ft_strlen(s) > 10)
+		return (1);
+	if (ft_strlen(s) == 10 && ft_atoi(s) < 0 && is_pos != 0)
+		return (1);
+	else if (ft_strlen(s) == 10 && ft_atoi(s) < 0 && ft_atoi(s) > -2147483648)
+		return (1);
+	while (*s)
 	{
-		if (ft_isdigit(s[i]) == 0)
+		if (ft_isdigit(*s) == 0)
 			return (1);
-		i++;
+		s++;
 	}
 	return (0);
 }
@@ -46,7 +58,7 @@ int	ft_checkdobble(int n, t_list **pile)
 int	ft_parse(int ac, char **av, t_list **pile)
 {
 	int		i;
-	int		*content;
+	void	*content;
 	t_list	*next;
 
 	*pile = NULL;
@@ -55,13 +67,13 @@ int	ft_parse(int ac, char **av, t_list **pile)
 	i = 1;
 	while (i < ac)
 	{
-		if (ft_checknum(av[i]) == 1)
+		if (ft_checkint(av[i]) == 1)
 			return (1);
 		content = malloc(sizeof(int));
 		if (!content)
 			return (1);
-		*content = ft_atoi(av[i]);
-		if (ft_checkdobble(*content, pile) == 1)
+		*(int *)content = ft_atoi(av[i]);
+		if (ft_checkdobble(*(int *)content, pile) == 1)
 			return (1);
 		next = ft_lstnew(content);
 		if (!next)

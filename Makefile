@@ -6,14 +6,14 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 16:38:50 by mriant            #+#    #+#              #
-#    Updated: 2022/02/17 16:56:04 by mriant           ###   ########.fr        #
+#    Updated: 2022/02/18 14:28:02 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = ${addprefix srcs/, \
-	ops.c \
+	main.c \
 	parsing.c \
 	push_swap.c}
 OBJS = ${patsubst srcs/%.c, build/%.o, ${SRCS}}
