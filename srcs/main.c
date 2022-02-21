@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 10:58:05 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/21 16:01:37 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:41:47 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av)
 	t_list	*a_pile;
 	t_list	*b_pile;
 	char	**arg;
+	int		len;
 
 	a_pile = NULL;
 	b_pile = NULL;
@@ -25,10 +26,14 @@ int	main(int ac, char **av)
 	if (ac < 2 || ft_parse(ac, av, &arg, &a_pile) == 1)
 	{
 		ft_fprintf(2, "Error\n");
-		ft_lstclear(&a_pile, free);
+		ft_clean(&a_pile, &b_pile, &arg);
 		return (1);
 	}
-	if (ft_tablen(arg) == 3)
+	len = ft_tablen(arg);
+	if (len == 2)
+		ft_sort2(a_pile);
+	if (len == 3)
 		ft_sort3(a_pile);
+	ft_clean(&a_pile, &b_pile, &arg);
 	return (0);
 }
