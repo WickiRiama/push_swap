@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/21 17:26:29 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/21 20:21:03 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,21 @@ void	ft_sort3(t_list *list)
 	}
 }
 
-void	ft_sort(t_list **a_list, t_list **b_list)
+int	ft_sort(t_list **a_list, t_list **b_list)
 {
-	ft_lstiter(*a_list, &ft_dec2bin);
+	t_list	*bin_list;
+	t_list	*temp;
+
+	(void) b_list;
+	bin_list = ft_lstmap(*a_list, &ft_dec2bin, &free);
+	if (!bin_list)
+		return (1);
+	temp = bin_list;
+	while(temp)
+	{
+		ft_printf("%s\n", temp->content);
+		temp = temp->next;
+	}
+	ft_lstclear(&bin_list, &free);
+	return (0);
 }

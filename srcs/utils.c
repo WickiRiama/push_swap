@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:00:22 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/21 17:30:38 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/21 20:12:24 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,31 @@ void	ft_clean(t_list **a_pile, t_list **b_pile, char ***tab)
 	}
 }
 
-char*	ft_dec2bin(int	*n)
+void	*ft_dec2bin(void	*n)
 {
-	if (n / 2 != 0)
-		ft_dec2bin(n / 2, result, base, fd);
-	c = base[(n % len)];
-	*result += ft_putchar_int(c, fd);
+	char	*result;
+	int		len;
+	int		i;
+	int		nb;
+
+	len = 1;
+	nb = *(int *)n;
+	while (nb / 2 != 0)
+	{
+		len++;
+		nb = nb / 2;
+	}
+	result = malloc(sizeof(char) * (len + 1));
+	if (!result)
+		return (NULL);
+	i = len - 1;
+	nb = *(int *)n;
+	while (i >= 0)
+	{
+		result[i] = nb % 2 + '0';
+		nb = nb / 2;
+		i --;
+	}
+	result[len] = '\0';
+	return ((void *)result);
 }
