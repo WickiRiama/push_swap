@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:52:59 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/18 16:19:04 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/21 16:10:51 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,13 @@ int	ft_checkdobble(int n, t_list **pile)
 	return (0);
 }
 
-int	ft_parse(int ac, char **av, t_list **pile)
+int	ft_checkinput(int ac, char **av, t_list **pile)
 {
 	int		i;
 	void	*content;
 	t_list	*next;
 
-	*pile = NULL;
-	if (!av)
-		return (-1);
-	i = 1;
+	i = 0;
 	while (i < ac)
 	{
 		if (ft_checkint(av[i]) == 1)
@@ -81,5 +78,30 @@ int	ft_parse(int ac, char **av, t_list **pile)
 		ft_lstadd_back(pile, next);
 		i++;
 	}
+	return (0);
+}
+
+int	ft_parse(int ac, char **av, char ***arg, t_list **pile)
+{
+	int		i;
+
+	*pile = NULL;
+	if (!av)
+		return (-1);
+	if (ac == 2)
+		*arg = ft_split(av[1], ' ');
+	else
+	{
+		*arg = malloc(sizeof(char *) * ac);
+		i = 0;
+		while (i < ac - 1)
+		{
+			arg[0][i] = ft_strdup(av[i + 1]);
+			i ++;
+		}
+		arg[0][i] = NULL;
+	}
+	if (ft_checkinput(ft_tablen(*arg), *arg, pile) == 1)
+		return (1);
 	return (0);
 }
