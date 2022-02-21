@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/21 16:27:25 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/21 17:26:29 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,9 @@ void	ft_sort3(t_list *list)
 		else
 			ft_printf("sa\nrra\n");
 	}
+}
+
+void	ft_sort(t_list **a_list, t_list **b_list)
+{
+	ft_lstiter(*a_list, &ft_dec2bin);
 }
