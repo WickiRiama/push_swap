@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:52:59 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/21 16:10:51 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/22 10:29:30 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	ft_parse(int ac, char **av, char ***arg, t_list **pile)
 		while (i < ac - 1)
 		{
 			arg[0][i] = ft_strdup(av[i + 1]);
+			if (!arg[0][i])
+				return (1);
 			i ++;
 		}
 		arg[0][i] = NULL;

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:00:22 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/21 20:12:24 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/22 17:27:06 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_clean(t_list **a_pile, t_list **b_pile, char ***tab)
 	}
 }
 
-void	*ft_dec2bin(void	*n)
+void	*ft_dec2bin(void *n)
 {
 	char	*result;
 	int		len;
@@ -68,4 +68,39 @@ void	*ft_dec2bin(void	*n)
 	}
 	result[len] = '\0';
 	return ((void *)result);
+}
+
+int	ft_bin2dec(void *s)
+{
+	int		result;
+	int		i;
+	char	*str;
+
+	str = (char *)s;
+	result = 0;
+	i = 0;
+	while(str[i])
+	{
+		result = result * 2 + str[i] - '0';
+		i++;
+	}
+	return (result);
+}
+
+int	ft_checksorted(t_list *list, unsigned int shift)
+{
+	int	n1;
+	int	n2;
+
+	while (list->next)
+	{
+		n1 = *(int *)list->content >> shift & 1;
+		n2 = *(int *)list->next->content >> shift & 1;
+		if (n1 > n2 && shift < sizeof(int) * 8 - 1)
+			return (0);
+		else if (n1 < n2 && shift == sizeof(int) * 8 - 1)
+			return (0);
+		list = list->next;
+	}
+	return (1);
 }
