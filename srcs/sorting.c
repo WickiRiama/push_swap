@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/22 17:31:42 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/23 17:55:16 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,54 +54,72 @@ void	ft_radix(t_list **a_list, t_list **b_list, unsigned int shift)
 	i = 0;
 	while (i < len)
 	{
+		if (ft_checksorted(*a_list, -1) == 1)
+			break ;
 		nb = *(int *)(*a_list)->content >> shift & 1;
-		if ((nb == 0 && shift < sizeof(int) * 8 - 1) 
+		if ((nb == 0 && shift < sizeof(int) * 8 - 1)
 			|| (nb == 1 && shift == sizeof(int) * 8 - 1))
 		{
 			ft_printf("pb\n");
 			ft_push(a_list, b_list);
 		}
-		else
+		else if ((*a_list)->next)
 		{
 			ft_printf("ra\n");
 			ft_rotate(a_list);
 		}
 		i++;
 	}
-	while (*b_list)
+	if (*b_list)
 	{
-		ft_printf("pa\n");
-		ft_push(b_list, a_list);
+		i = 0;
+		len = ft_lstsize(*b_list);
+		shift ++;
+		if (ft_checkb(*b_list, shift) == 1 && shift < sizeof(int) * 8 - 1)
+			return ;
+		while (i < len)
+		{
+			nb = *(int *)(*b_list)->content >> shift & 1;
+			if ((nb == 1 && shift < sizeof(int) * 8 - 1)
+				|| (nb == 0 && shift == sizeof(int) * 8 - 1)
+				|| shift > sizeof(int) * 8 - 1)
+			{
+				ft_printf("pa\n");
+				ft_push(b_list, a_list);
+			}
+			else if ((*b_list)->next)
+			{
+				ft_printf("rb\n");
+				ft_rotate(b_list);
+			}
+		i++;
+		}
 	}
 }
 
-int	ft_sortbig(t_list **a_list, t_list **b_list)
+void	ft_sortbig(t_list **a_list, t_list **b_list)
 {
-	(void) b_list;
-	unsigned int	i;
+	long int	i;
 
 	i = 0;
-	while(i < sizeof(int) * 8)
+	while (ft_checksorted(*a_list, -1) == 0 || *b_list)
 	{
-		if (ft_checksorted(*a_list, i) == 0)
-		{
-			ft_radix(a_list, b_list, i);
-		}
+		ft_radix(a_list, b_list, i);
 		i++;
 	}
-	return (0);
+	return ;
 }
 
 int	ft_sort(t_list **a_list, t_list **b_list)
 {
 	int	len;
-	
+
 	len = ft_lstsize(*a_list);
 	if (len == 2)
 		ft_sort2(*a_list);
 	if (len == 3)
 		ft_sort3(*a_list);
-	if(len > 3 && ft_sortbig(a_list, b_list))
-		return(1);
+	if (len > 3)
+		ft_sortbig(a_list, b_list);
 	return (0);
 }
