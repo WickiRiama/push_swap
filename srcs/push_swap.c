@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 10:58:17 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/21 11:25:06 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/28 17:26:53 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_swap(t_list **lst)
 {
 	t_list	*temp;
 
-	if (!lst || !(*lst)->next)
+	if (!(*lst) || !(*lst)->next)
 		return ;
 	temp = (*lst)->next;
 	(*lst)->next = temp->next;
@@ -29,7 +29,7 @@ void	ft_push(t_list **src, t_list **dest)
 {
 	t_list	*temp;
 
-	if (!src)
+	if (!(*src))
 		return ;
 	temp = *src;
 	*src = (*src)->next;
@@ -42,7 +42,7 @@ void	ft_rotate(t_list **lst)
 	t_list	*temp;
 	t_list	*last;
 
-	if (!lst || !(*lst)->next)
+	if (!(*lst) || !(*lst)->next)
 		return ;
 	temp = *lst;
 	last = ft_lstlast(*lst);
@@ -56,7 +56,7 @@ void	ft_rrotate(t_list **lst)
 	t_list	*temp;
 	t_list	*last;
 
-	if (!lst || !(*lst)->next)
+	if (!*(lst) || !(*lst)->next)
 		return ;
 	last = ft_lstlast(*lst);
 	temp = *lst;

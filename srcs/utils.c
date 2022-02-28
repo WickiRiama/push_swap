@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:00:22 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/23 16:52:02 by mriant           ###   ########.fr       */
+/*   Updated: 2022/02/28 19:39:35 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	ft_checksorted(t_list *list, long int shift)
 		}
 		else
 		{
-			n1 = *(int *)list->content;
-			n2 = *(int *)list->next->content;
+			n1 = list->index;
+			n2 = list->next->index;
 		}
 		if (n1 > n2 && shift < (long int)(sizeof(int) * 8 - 1))
 			return (0);
@@ -73,7 +73,7 @@ int	ft_checkb(t_list *list, long int shift)
 
 	while (list)
 	{
-		n = *(int *)list->content >> shift & 1;
+		n = list->index >> shift & 1;
 		if (n == 1)
 			return (0);
 		list = list->next;

@@ -13,3 +13,7 @@ checker_Mac
 checker_linux
 rand_nb.sh
 *.py
+checker
+push_swap_run_args.log
+push_swap_tester/
+tester2/
