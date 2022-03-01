@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:52:59 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/28 19:16:44 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/01 11:10:16 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_checkdobble(int n, t_list **pile)
 	item = *pile;
 	while (item)
 	{
-		if (n == *(int *)(item->content))
+		if (n == item->content->value)
 			return (1);
 		item = item->next;
 	}
@@ -58,20 +58,20 @@ int	ft_checkdobble(int n, t_list **pile)
 
 int	ft_checkinput(int ac, char **av, t_list **pile)
 {
-	int		i;
-	void	*content;
-	t_list	*next;
+	int			i;
+	t_content	*content;
+	t_list		*next;
 
 	i = 0;
 	while (i < ac)
 	{
 		if (ft_checkint(av[i]) == 1)
 			return (1);
-		content = malloc(sizeof(int));
+		content = malloc(sizeof(t_content));
 		if (!content)
 			return (1);
-		*(int *)content = ft_atoi(av[i]);
-		if (ft_checkdobble(*(int *)content, pile) == 1)
+		content->value = ft_atoi(av[i]);
+		if (ft_checkdobble(content->value, pile) == 1)
 			return (1);
 		next = ft_lstnew(content);
 		if (!next)
@@ -84,31 +84,26 @@ int	ft_checkinput(int ac, char **av, t_list **pile)
 
 void	ft_setrank(t_list *pile)
 {
-	int	i;
-	int	min;
+	int		i;
+	int		min;
 	t_list	*temp;
 
 	i = 0;
-	temp = pile;
-	while (temp)
-	{
-		temp->index = -1;
-		temp = temp->next;
-	}
+	ft_initindex(pile);
 	while (i < ft_lstsize(pile))
 	{
 		temp = pile;
 		min = 2147483647;
 		while (temp)
 		{
-			if (temp->index == -1 && *(int *)temp->content < min)
-				min = *(int *)temp->content;
+			if (temp->content->index == -1 && temp->content->value < min)
+				min = temp->content->value;
 			temp = temp->next;
 		}
 		temp = pile;
-		while (*(int *)temp->content != min)
+		while (temp->content->value != min)
 			temp = temp->next;
-		temp->index = i;
+		temp->content->index = i;
 		i++;
 	}
 }

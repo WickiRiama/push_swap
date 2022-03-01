@@ -6,13 +6,18 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:53:52 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/28 16:48:25 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/01 10:50:56 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+typedef struct s_content
+{
+	int	value;
+	int	index;
+}				t_content;
 int		ft_checkb(t_list *list, long int shift);
 int		ft_checksorted(t_list *list, long int shift);
 void	ft_clean(t_list **a_pile, t_list **b_pile, char ***tab);

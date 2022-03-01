@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:00:22 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/28 19:39:35 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/01 11:16:29 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_clean(t_list **a_pile, t_list **b_pile, char ***tab)
 			free(tab[0][i]);
 			i++;
 		}
-	free(*tab);
+		free(*tab);
 	}
 }
 
@@ -67,16 +67,14 @@ int	ft_checksorted(t_list *list, long int shift)
 	return (1);
 }
 
-int	ft_checkb(t_list *list, long int shift)
+void	ft_initindex(t_list *list)
 {
-	int	n;
+	t_list	*temp;
 
-	while (list)
+	temp = pile;
+	while (temp)
 	{
-		n = list->index >> shift & 1;
-		if (n == 1)
-			return (0);
-		list = list->next;
+		temp->content->index = -1;
+		temp = temp->next;
 	}
-	return (1);
 }
