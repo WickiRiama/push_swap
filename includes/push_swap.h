@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:53:52 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/02 14:25:08 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/02 15:57:52 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ typedef struct s_content
 	int	value;
 	int	index;
 }				t_content;
+typedef struct s_moves
+{
+	int	ra;
+	int	rra;
+	int	rb;
+	int	rrb;
+	int	rr;
+	int	rrr;
+	int	score;
+}				t_moves;
 int		ft_checkb(t_list *list, long int shift);
 int		ft_checksorted(t_list *list, long int shift);
 void	ft_clean(t_list **a_pile, t_list **b_pile, char ***tab);
