@@ -6,14 +6,14 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 16:38:50 by mriant            #+#    #+#              #
-#    Updated: 2022/03/02 10:32:13 by mriant           ###   ########.fr        #
+#    Updated: 2022/03/02 14:38:35 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = ${addprefix srcs/, \
-	insert.c \
+	insert_in.c \
 	main.c \
 	parsing.c \
 	push_swap.c \
@@ -36,7 +36,7 @@ ${NAME}: ${LIBFT} ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} -o ${NAME} ${LFLAGS}
 
 ${LIBFT}:
-	make -s -C libft
+	make -C libft
 
 build/%.o: srcs/%.c
 	@mkdir -p build

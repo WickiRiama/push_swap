@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insert.c                                           :+:      :+:    :+:   */
+/*   insert_in.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 11:01:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/02 11:37:21 by mriant           ###   ########.fr       */
+/*   Created: 2022/03/02 13:22:45 by mriant            #+#    #+#             */
+/*   Updated: 2022/03/02 13:26:43 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_insert_a(t_list **a_list, t_list **b_list)
 		ft_push(a_list, b_list);
 		first = ft_setfirst(*a_list, med);
 	}
-	while (*a_list)
+	while (ft_lstsize(*a_list) > 3)
 	{
 		ft_printf("pb\n");
 		ft_push(a_list, b_list);

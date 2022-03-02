@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/02 11:26:17 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/02 14:45:08 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,36 @@
 
 void	ft_sort2(t_list *list)
 {
-	if (*(int *)list->content > *(int *)list->next->content)
+	if (((t_content *)list->content)->index
+		> ((t_content *)list->next->content)->index)
 		ft_printf("sa\n");
 }
 
-void	ft_sort3(t_list *list)
+void	ft_sort3(t_list **list, int n0, int n1, int n2)
 {
-	if (*(int *)list->content < *(int *)list->next->content)
+	if (n0 < n1)
 	{
-		if (*(int *)list->next->content > *(int *)list->next->next->content)
+		if (n1 > n2)
 		{
-			ft_printf("rra\n");
-			if (*(int *)list->content < *(int *)list->next->next->content)
-				ft_printf("sa\n");
+			ft_do_op(list, NULL, "rra");
+			if (n0 < n2)
+				ft_do_op(list, NULL, "sa");
 		}
 	}
 	else
 	{
-		if (*(int *)list->next->content < *(int *)list->next->next->content)
+		if (n1 < n2)
 		{
-			if (*(int *)list->content < *(int *)list->next->next->content)
-				ft_printf("sa\n");
+			if (n0 < n2)
+				ft_do_op(list, NULL, "sa");
 			else
-				ft_printf("ra\n");
+				ft_do_op(list, NULL, "ra");
 		}
 		else
-			ft_printf("sa\nrra\n");
+		{
+			ft_do_op(list, NULL, "sa");
+			ft_do_op(list, NULL, "rra");
+		}
 	}
 }
 
@@ -54,6 +58,9 @@ void	ft_sortbig(t_list **a_list, t_list **b_list)
 	else
 	{
 		ft_insert_a(a_list, b_list);
+		ft_sort3(a_list, ((t_content *)(*a_list)->content)->index,
+			((t_content *)(*a_list)->next->content)->index,
+			((t_content *)(*a_list)->next->next->content)->index);
 	}
 }
 
@@ -65,7 +72,9 @@ int	ft_sort(t_list **a_list, t_list **b_list)
 	if (len == 2)
 		ft_sort2(*a_list);
 	if (len == 3)
-		ft_sort3(*a_list);
+		ft_sort3(a_list, ((t_content *)(*a_list)->content)->index,
+			((t_content *)(*a_list)->next->content)->index,
+			((t_content *)(*a_list)->next->next->content)->index);
 	if (len > 3)
 		ft_sortbig(a_list, b_list);
 	return (0);
