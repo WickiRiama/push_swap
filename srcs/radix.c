@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 10:59:33 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/01 11:33:55 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/02 10:40:00 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_checkb(t_list *list, long int shift)
 
 	while (list)
 	{
-		n = list->index >> shift & 1;
+		n = ((t_content *)list->content)->index >> shift & 1;
 		if (n == 1)
 			return (0);
 		list = list->next;
@@ -37,7 +37,7 @@ void	ft_radix_a(t_list **a_list, t_list **b_list, unsigned int shift)
 	{
 		if (ft_checksorted(*a_list, -1) == 1)
 			break ;
-		nb = (*a_list)->index >> shift & 1;
+		nb = ((t_content *)(*a_list)->content)->index >> shift & 1;
 		if ((nb == 0 && shift < sizeof(int) * 8 - 1)
 			|| (nb == 1 && shift == sizeof(int) * 8 - 1))
 		{
@@ -65,7 +65,7 @@ void	ft_radix_b(t_list **a_list, t_list **b_list, unsigned int shift)
 		return ;
 	while (len > 0)
 	{
-		nb = (*b_list)->index >> shift & 1;
+		nb = ((t_content *)(*b_list)->content)->index >> shift & 1;
 		if ((nb == 1 && shift < sizeof(int) * 8 - 1)
 			|| (nb == 0 && shift == sizeof(int) * 8 - 1)
 			|| shift > sizeof(int) * 8 - 1)

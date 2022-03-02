@@ -6,55 +6,53 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 11:01:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/01 17:38:57 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/02 11:37:21 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-int	ft_setfirst(t_list *list)
+int	ft_setfirst(t_list *list, int med)
 {
 	int		first;
-	int		med;
-	
+	int		len;
+
 	first = 0;
-	med = ft_lstsize(*a_list) / 2;
-	while (list && list->content->index > med)
+	len = ft_lstsize(list);
+	while (list && ((t_content *)list->content)->index > med)
 	{
 		first++;
 		list = list->next;
 	}
-	if (first >= ft_lstsize(list)
-		return (-1);
+	if (first >= len)
+		first = -1;
 	return (first);
 }
 
-int	ft_setlast(t_list *list)
+int	ft_setlast(t_list *list, int med)
 {
 	int	last;
-	int	med;
 
 	last = 1;
-	med = ft_lstsize(*a_list) / 2;
 	while (list)
 	{
-		if (list->content->index <= med)
+		if (((t_content *)list->content)->index <= med)
 			last = 0;
 		last++;
 		list = list->next;
-		return (last);
 	}
+	return (last);
 }
 
-void	ft_smartrotate(t_list **list, int first, int last)
+void	ft_smartrotate(t_list **list, int first, int last, char c)
 {
-	if (first < last)
+	if (first <= last)
 	{
-		while (first)
+		while (first > 0)
 		{
-			ft_printf("ra\n");
-			ft_rotate(a_list);
+			ft_printf("r%c\n", c);
+			ft_rotate(list);
 			first--;
 		}
 	}
@@ -62,28 +60,28 @@ void	ft_smartrotate(t_list **list, int first, int last)
 	{
 		while (last)
 		{
-			ft_printf("rra\n");
-			ft_rrotate(a_list);
+			ft_printf("rr%c\n", c);
+			ft_rrotate(list);
 			last--;
 		}
 	}
 }
 
-
 void	ft_insert_a(t_list **a_list, t_list **b_list)
 {
-	t_list	*temp;
 	int		first;
 	int		last;
+	int		med;
 
-	first = ft_setfirst(*a_list);
+	med = ft_lstsize(*a_list) / 2;
+	first = ft_setfirst(*a_list, med);
 	while (first > -1)
 	{
-		last = ft_setlast(*a_list);
-		ft_smartrotate(a_list, first, last);
+		last = ft_setlast(*a_list, med);
+		ft_smartrotate(a_list, first, last, 'a');
 		ft_printf("pb\n");
 		ft_push(a_list, b_list);
-		first = ft_setfirst(*a_list);
+		first = ft_setfirst(*a_list, med);
 	}
 	while (*a_list)
 	{

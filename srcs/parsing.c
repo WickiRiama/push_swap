@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:52:59 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/01 11:10:16 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/02 10:25:46 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_checkdobble(int n, t_list **pile)
 	item = *pile;
 	while (item)
 	{
-		if (n == item->content->value)
+		if (n == ((t_content *)item->content)->value)
 			return (1);
 		item = item->next;
 	}
@@ -96,14 +96,15 @@ void	ft_setrank(t_list *pile)
 		min = 2147483647;
 		while (temp)
 		{
-			if (temp->content->index == -1 && temp->content->value < min)
-				min = temp->content->value;
+			if (((t_content *)temp->content)->index == -1
+				&& ((t_content *)temp->content)->value < min)
+				min = ((t_content *)temp->content)->value;
 			temp = temp->next;
 		}
 		temp = pile;
-		while (temp->content->value != min)
+		while (((t_content *)temp->content)->value != min)
 			temp = temp->next;
-		temp->content->index = i;
+		((t_content *)temp->content)->index = i;
 		i++;
 	}
 }

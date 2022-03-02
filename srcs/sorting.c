@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/01 11:26:13 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/02 11:26:17 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,14 @@ void	ft_sort3(t_list *list)
 
 void	ft_sortbig(t_list **a_list, t_list **b_list)
 {
-	int	i;
 	int	radix;
 
-	radix = 1;
+	radix = 0;
 	if (radix == 1)
 		ft_radix(a_list, b_list);
 	else
-	{	
-		i = 100;
-		ft_insert(a_list, b_list, i);
+	{
+		ft_insert_a(a_list, b_list);
 	}
 }
 
