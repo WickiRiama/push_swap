@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/02 14:45:08 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/03 10:35:43 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_sortbig(t_list **a_list, t_list **b_list)
 	else
 	{
 		ft_insert_a(a_list, b_list);
+		ft_printpile(*a_list, "a");
 		ft_sort3(a_list, ((t_content *)(*a_list)->content)->index,
 			((t_content *)(*a_list)->next->content)->index,
 			((t_content *)(*a_list)->next->next->content)->index);

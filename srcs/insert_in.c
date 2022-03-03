@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 13:22:45 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/02 13:26:43 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/03 10:37:39 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_insert_a(t_list **a_list, t_list **b_list)
 
 	med = ft_lstsize(*a_list) / 2;
 	first = ft_setfirst(*a_list, med);
-	while (first > -1)
+	while (first > -1 && ft_lstsize(*a_list) > 3)
 	{
 		last = ft_setlast(*a_list, med);
 		ft_smartrotate(a_list, first, last, 'a');

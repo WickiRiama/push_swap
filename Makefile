@@ -6,18 +6,20 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 16:38:50 by mriant            #+#    #+#              #
-#    Updated: 2022/03/02 14:38:35 by mriant           ###   ########.fr        #
+#    Updated: 2022/03/03 12:02:27 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = ${addprefix srcs/, \
+	insert_back.c \
 	insert_in.c \
 	main.c \
 	parsing.c \
 	push_swap.c \
 	radix.c \
+	set_move.c \
 	sorting.c \
 	test.c \
 	utils.c}
