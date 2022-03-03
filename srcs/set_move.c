@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 12:01:21 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/03 12:01:24 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/03 16:16:01 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,26 @@
 
 int	ft_minmax(t_moves **moves, t_list *list, int index)
 {
-	int	min;
-	int	max;
+	int		min;
+	int		max;
+	t_list	*temp;
 
-	*max = 0;
-	*min = 2147483647;
-	while (list)
+	max = 0;
+	min = 2147483647;
+	temp = list;
+	while (temp)
 	{
-		if (*max < ((t_content *)list->content)->index)
-			*max = ((t_content *)list->content)->index;
-		if (*min > ((t_content *)list->content)->index)
-			*min = ((t_content *)list->content)->index;
-		list = list->next;
+		if (max < ((t_content *)temp->content)->index)
+			max = ((t_content *)temp->content)->index;
+		if (min > ((t_content *)temp->content)->index)
+			min = ((t_content *)temp->content)->index;
+		temp = temp->next;
 	}
 	if (index < min || index > max)
 	{
 		while (((t_content *)list->content)->index != min)
 		{
-			(*moves)->rb ++;
+			(*moves)->ra ++;
 			list = list->next;
 		}
 		return (1);
@@ -49,7 +51,7 @@ void	ft_firstlast(t_moves **moves, t_list *list, int index)
 	first = ((t_content *)list->content)->index;
 	while (index < last || index > first)
 	{
-		(*moves)->rb ++;
+		(*moves)->ra ++;
 		last = ((t_content *)list->content)->index;
 		list = list->next;
 		first = ((t_content *)list->content)->index;
@@ -60,14 +62,10 @@ void	ft_optimized_r(t_moves **moves)
 {
 	(*moves)->rr = ft_min((*moves)->ra, (*moves)->rb);
 	(*moves)->rrr = ft_min((*moves)->rra, (*moves)->rrb);
-	if (ft_min((*moves)->ra, (*moves)->rb) == (*moves)->ra)
-		(*moves)->ra = 0;
-	else
-		(*moves)->rb = 0;
-	if (ft_min((*moves)->rra, (*moves)->rrb) == (*moves)->rra)
-		(*moves)->rra = 0;
-	else
-		(*moves)->rrb = 0;
+	(*moves)->ra = (*moves)->ra - (*moves)->rr;
+	(*moves)->rb = (*moves)->rb - (*moves)->rr;
+	(*moves)->rrb = (*moves)->rrb - (*moves)->rrr;
+	(*moves)->rb = (*moves)->rb - (*moves)->rr;
 }
 
 void	ft_setscore(t_moves **moves)
@@ -79,9 +77,21 @@ void	ft_setscore(t_moves **moves)
 
 	s1 = (*moves)->ra + (*moves)->rb + (*moves)->rr;
 	s2 = (*moves)->rra + (*moves)->rrb + (*moves)->rrr;
-	s3 = (*moves)->ra + (*moves)->rrb;
-	s4 = (*moves)->rra + (*moves)->rb;
+	s3 = (*moves)->ra + (*moves)->rrb + (*moves)->rr + (*moves)->rrr;
+	s4 = (*moves)->rra + (*moves)->rb + (*moves)->rr + (*moves)->rrr;
 	(*moves)->score = ft_min(ft_min(s1, s2), ft_min(s3, s4));
+	if ((*moves)->score == s1 || (*moves)->score == s3)
+		(*moves)->rra = 0;
+	if ((*moves)->score == s1 || (*moves)->score == s4)
+		(*moves)->rrb = 0;
+	if ((*moves)->score == s1)
+		(*moves)->rrr = 0;
+	if ((*moves)->score == s2 || (*moves)->score == s4)
+		(*moves)->ra = 0;
+	if ((*moves)->score == s2 || (*moves)->score == s3)
+		(*moves)->rb = 0;
+	if ((*moves)->score == s2)
+		(*moves)->rr = 0;
 }
 
 t_moves	*ft_setmove(int index, t_list *list, int i)
@@ -93,12 +103,12 @@ t_moves	*ft_setmove(int index, t_list *list, int i)
 	moves = malloc(sizeof(t_moves));
 	if (!moves)
 		return (NULL);
-	moves->ra = i;
-	moves->rra = len - i;
-	moves->rb = 0;
+	moves->rb = i;
+	moves->rrb = len - i;
+	moves->ra = 0;
 	if (ft_minmax(&moves, list, index) == 0)
 		ft_firstlast(&moves, list, index);
-	moves->rrb = len - moves->rb;
+	moves->rra = len - moves->ra;
 	ft_optimized_r(&moves);
 	ft_setscore(&moves);
 	return (moves);

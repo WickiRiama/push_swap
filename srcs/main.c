@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 10:58:05 by mriant            #+#    #+#             */
-/*   Updated: 2022/02/22 10:25:48 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/03 13:23:10 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 		ft_clean(&a_pile, &b_pile, &arg);
 		return (1);
 	}
-	if (ft_sort(&a_pile, &b_pile))
+	if (ft_sort(&a_pile, &b_pile) == 1)
 	{
 		ft_fprintf(2, "Error\n");
 		ft_clean(&a_pile, &b_pile, &arg);

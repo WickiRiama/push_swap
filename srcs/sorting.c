@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/03 10:35:43 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/03 13:37:03 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_sort3(t_list **list, int n0, int n1, int n2)
 	}
 }
 
-void	ft_sortbig(t_list **a_list, t_list **b_list)
+int	ft_sortbig(t_list **a_list, t_list **b_list)
 {
 	int	radix;
 
@@ -58,11 +58,13 @@ void	ft_sortbig(t_list **a_list, t_list **b_list)
 	else
 	{
 		ft_insert_a(a_list, b_list);
-		ft_printpile(*a_list, "a");
 		ft_sort3(a_list, ((t_content *)(*a_list)->content)->index,
 			((t_content *)(*a_list)->next->content)->index,
 			((t_content *)(*a_list)->next->next->content)->index);
+		if (ft_insert_b(a_list, b_list) == 1)
+			return (1);
 	}
+	return (0);
 }
 
 int	ft_sort(t_list **a_list, t_list **b_list)
@@ -77,6 +79,9 @@ int	ft_sort(t_list **a_list, t_list **b_list)
 			((t_content *)(*a_list)->next->content)->index,
 			((t_content *)(*a_list)->next->next->content)->index);
 	if (len > 3)
-		ft_sortbig(a_list, b_list);
+	{
+		if (ft_sortbig(a_list, b_list) == 1)
+			return (1);
+	}
 	return (0);
 }
