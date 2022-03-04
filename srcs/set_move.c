@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 12:01:21 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/03 16:16:01 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/04 11:51:59 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_optimized_r(t_moves **moves)
 	(*moves)->ra = (*moves)->ra - (*moves)->rr;
 	(*moves)->rb = (*moves)->rb - (*moves)->rr;
 	(*moves)->rrb = (*moves)->rrb - (*moves)->rrr;
-	(*moves)->rb = (*moves)->rb - (*moves)->rr;
+	(*moves)->rra = (*moves)->rra - (*moves)->rrr;
 }
 
 void	ft_setscore(t_moves **moves)
@@ -80,35 +80,29 @@ void	ft_setscore(t_moves **moves)
 	s3 = (*moves)->ra + (*moves)->rrb + (*moves)->rr + (*moves)->rrr;
 	s4 = (*moves)->rra + (*moves)->rb + (*moves)->rr + (*moves)->rrr;
 	(*moves)->score = ft_min(ft_min(s1, s2), ft_min(s3, s4));
-	if ((*moves)->score == s1 || (*moves)->score == s3)
-		(*moves)->rra = 0;
-	if ((*moves)->score == s1 || (*moves)->score == s4)
-		(*moves)->rrb = 0;
 	if ((*moves)->score == s1)
-		(*moves)->rrr = 0;
-	if ((*moves)->score == s2 || (*moves)->score == s4)
-		(*moves)->ra = 0;
-	if ((*moves)->score == s2 || (*moves)->score == s3)
-		(*moves)->rb = 0;
-	if ((*moves)->score == s2)
-		(*moves)->rr = 0;
+		ft_clean_moves(moves, 1);
+	else if ((*moves)->score == s2)
+		ft_clean_moves(moves, 2);
+	else if ((*moves)->score == s3)
+		ft_clean_moves(moves, 3);
+	else if ((*moves)->score == s4)
+		ft_clean_moves(moves, 4);
 }
 
-t_moves	*ft_setmove(int index, t_list *list, int i)
+t_moves	*ft_setmove(int index, t_list *a_list, t_list *b_list, int i)
 {
 	t_moves	*moves;
-	int		len;
 
-	len = ft_lstsize(list);
 	moves = malloc(sizeof(t_moves));
 	if (!moves)
 		return (NULL);
 	moves->rb = i;
-	moves->rrb = len - i;
+	moves->rrb = ft_lstsize(b_list) - i;
 	moves->ra = 0;
-	if (ft_minmax(&moves, list, index) == 0)
-		ft_firstlast(&moves, list, index);
-	moves->rra = len - moves->ra;
+	if (ft_minmax(&moves, a_list, index) == 0)
+		ft_firstlast(&moves, a_list, index);
+	moves->rra = ft_lstsize(a_list) - moves->ra;
 	ft_optimized_r(&moves);
 	ft_setscore(&moves);
 	return (moves);

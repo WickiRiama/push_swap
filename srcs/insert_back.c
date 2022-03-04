@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 13:27:35 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/03 17:35:53 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/04 12:02:35 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_moves	*ft_chosepush(t_list **a_list, t_list **b_list)
 	temp = *b_list;
 	while (temp)
 	{
-		tp_mvs = ft_setmove(((t_content *)(*b_list)->content)->index,
-				*a_list, i);
+		tp_mvs = ft_setmove(((t_content *)temp->content)->index, *a_list,
+				*b_list, i);
 		if (!tp_mvs)
 			return (NULL);
 		if (!moves || moves->score > tp_mvs->score)
@@ -80,29 +80,30 @@ void	ft_do_rrmoves(t_moves **moves, t_list **a_list, t_list **b_list)
 	}
 }
 
-char	*ft_last_rotate(t_list **list)
+char	*ft_last_rotate(t_list *list)
 {
 	t_list	*temp;
 	int		min;
 	int		i;
 	int		imin;
 
-	i = 0:
+	i = 0;
 	min  = ((t_content *)list->content)->index;
+	temp = list;
 	while(temp)
 	{
-		if (((t_content *)list->content)->index < min)
+		if (((t_content *)temp->content)->index < min)
 		{
-			min = ((t_content *)list->content)->index;
-			i_min = i;
+			min = ((t_content *)temp->content)->index;
+			imin = i;
 		}
 		temp = temp->next;
 		i++;
 	}
-	if (imin <= ft_lstsize(*list) - imin)
-		return (imin);
+	if (imin <= ft_lstsize(list) - imin)
+		return ("ra");
 	else
-		return (ft_lstsize(*list) - imin);
+		return ("rra");
 }
 
 int	ft_insert_b(t_list **a_list, t_list **b_list)
@@ -119,7 +120,7 @@ int	ft_insert_b(t_list **a_list, t_list **b_list)
 		ft_do_rrmoves(&moves, a_list, b_list);
 		ft_do_op(b_list, a_list, "pa");
 	}
-	last_r = ft_last_rotate(a_list);
+	last_r = ft_last_rotate(*a_list);
 	while (ft_checksorted(*a_list, -1) == 0)
 		ft_do_op(a_list, NULL, last_r);
 	free(moves);
