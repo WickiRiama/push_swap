@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 12:01:21 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/04 11:51:59 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/04 13:48:59 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,33 @@ void	ft_firstlast(t_moves **moves, t_list *list, int index)
 	}
 }
 
-void	ft_optimized_r(t_moves **moves)
+void	ft_clean_moves(t_moves **moves, int i)
 {
-	(*moves)->rr = ft_min((*moves)->ra, (*moves)->rb);
-	(*moves)->rrr = ft_min((*moves)->rra, (*moves)->rrb);
-	(*moves)->ra = (*moves)->ra - (*moves)->rr;
-	(*moves)->rb = (*moves)->rb - (*moves)->rr;
-	(*moves)->rrb = (*moves)->rrb - (*moves)->rrr;
-	(*moves)->rra = (*moves)->rra - (*moves)->rrr;
+	if (i == 1)
+	{
+		(*moves)->ra = (*moves)->ra - (*moves)->rr;
+		(*moves)->rb = (*moves)->rb - (*moves)->rr;
+		(*moves)->rrr = 0;
+	}
+	if (i == 2)
+	{
+		(*moves)->rrb = (*moves)->rrb - (*moves)->rrr;
+		(*moves)->rra = (*moves)->rra - (*moves)->rrr;
+		(*moves)->rr = 0;
+	}
+	if (i == 1 || i == 3)
+		(*moves)->rra = 0;
+	if (i == 1 || i == 4)
+		(*moves)->rrb = 0;
+	if (i == 2 || i == 4)
+		(*moves)->ra = 0;
+	if (i == 2 || i == 3)
+		(*moves)->rb = 0;
+	if (i == 3 || i == 4)
+	{
+		(*moves)->rr = 0;
+		(*moves)->rrr = 0;
+	}
 }
 
 void	ft_setscore(t_moves **moves)
@@ -75,10 +94,10 @@ void	ft_setscore(t_moves **moves)
 	int	s3;
 	int	s4;
 
-	s1 = (*moves)->ra + (*moves)->rb + (*moves)->rr;
-	s2 = (*moves)->rra + (*moves)->rrb + (*moves)->rrr;
-	s3 = (*moves)->ra + (*moves)->rrb + (*moves)->rr + (*moves)->rrr;
-	s4 = (*moves)->rra + (*moves)->rb + (*moves)->rr + (*moves)->rrr;
+	s1 = (*moves)->ra + (*moves)->rb - (*moves)->rr;
+	s2 = (*moves)->rra + (*moves)->rrb - (*moves)->rrr;
+	s3 = (*moves)->ra + (*moves)->rrb;
+	s4 = (*moves)->rra + (*moves)->rb;
 	(*moves)->score = ft_min(ft_min(s1, s2), ft_min(s3, s4));
 	if ((*moves)->score == s1)
 		ft_clean_moves(moves, 1);
@@ -103,7 +122,8 @@ t_moves	*ft_setmove(int index, t_list *a_list, t_list *b_list, int i)
 	if (ft_minmax(&moves, a_list, index) == 0)
 		ft_firstlast(&moves, a_list, index);
 	moves->rra = ft_lstsize(a_list) - moves->ra;
-	ft_optimized_r(&moves);
+	moves->rr = ft_min(moves->ra, moves->rb);
+	moves->rrr = ft_min(moves->rra, moves->rrb);
 	ft_setscore(&moves);
 	return (moves);
 }

@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 13:27:35 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/04 12:02:35 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/04 13:49:53 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_do_rmoves(t_moves **moves, t_list **a_list, t_list **b_list)
 	while ((*moves)->rr)
 	{
 		ft_do_op(b_list, a_list, "rr");
-		(*moves)->rr--;;
+		(*moves)->rr--;
 	}
 	while ((*moves)->ra)
 	{
@@ -88,9 +88,9 @@ char	*ft_last_rotate(t_list *list)
 	int		imin;
 
 	i = 0;
-	min  = ((t_content *)list->content)->index;
+	min = ((t_content *)list->content)->index;
 	temp = list;
-	while(temp)
+	while (temp)
 	{
 		if (((t_content *)temp->content)->index < min)
 		{
@@ -119,10 +119,10 @@ int	ft_insert_b(t_list **a_list, t_list **b_list)
 		ft_do_rmoves(&moves, a_list, b_list);
 		ft_do_rrmoves(&moves, a_list, b_list);
 		ft_do_op(b_list, a_list, "pa");
+		free(moves);
 	}
 	last_r = ft_last_rotate(*a_list);
 	while (ft_checksorted(*a_list, -1) == 0)
 		ft_do_op(a_list, NULL, last_r);
-	free(moves);
 	return (0);
 }

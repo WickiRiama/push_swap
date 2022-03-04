@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:22:26 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/04 10:01:56 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/04 13:31:20 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_sort(t_list **a_list, t_list **b_list)
 		ft_sort3(a_list, ((t_content *)(*a_list)->content)->index,
 			((t_content *)(*a_list)->next->content)->index,
 			((t_content *)(*a_list)->next->next->content)->index);
-	if (len > 3)
+	else
 	{
 		if (ft_sortbig(a_list, b_list) == 1)
 			return (1);

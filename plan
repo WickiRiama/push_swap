@@ -1,7 +1,0 @@
-prendre élement de b
-calculer nb ra/rra et rb/rrb
-calculer rr et rrr
-calculer min de (ra + ra + rr, rra + rrb + rrr, ra + rrb, rra, rb)
-score = somme trouvée
-avancer à l'élément suivant
-si score <, garder ce score

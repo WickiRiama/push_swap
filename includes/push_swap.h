@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:53:52 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/04 11:52:28 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/04 12:44:44 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_initindex(t_list *list);
 void	ft_insert_a(t_list **a_list, t_list **b_list);
 int		ft_insert_b(t_list **a_list, t_list **b_list);
 int		ft_parse(int ac, char **av, char ***arg, t_list **pile);
-void	ft_printpile(t_list *list, char *s);
+void	ft_printpile(t_list *a_list, t_list *b_list);
 void	ft_push(t_list **src, t_list **dest);
 void	ft_radix(t_list **a_list, t_list **b_list);
 void	ft_rotate(t_list **lst);

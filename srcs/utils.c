@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:00:22 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/04 11:53:00 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/04 13:48:43 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,4 @@ void	ft_initindex(t_list *list)
 		((t_content *)temp->content)->index = -1;
 		temp = temp->next;
 	}
-}
-
-void	ft_clean_moves(t_moves **moves, int i)
-{
-	if (i == 1 || i == 3)
-		(*moves)->rra = 0;
-	if (i == 1 || i == 4)
-		(*moves)->rrb = 0;
-	if (i == 1)
-		(*moves)->rrr = 0;
-	if (i == 2 || i == 4)
-		(*moves)->ra = 0;
-	if (i == 2 || i == 3)
-		(*moves)->rb = 0;
-	if (i == 2)
-		(*moves)->rr = 0;
 }
