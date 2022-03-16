@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:00:22 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/04 13:48:43 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/16 13:49:05 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_checksorted(t_list *list, long int shift)
 	int	n1;
 	int	n2;
 
-	while (list->next)
+	while (list && list->next)
 	{
 		if (shift != -1)
 		{

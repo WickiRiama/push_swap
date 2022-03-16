@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 17:52:59 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/02 10:25:46 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/16 13:45:18 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_checkinput(int ac, char **av, t_list **pile)
 	i = 0;
 	while (i < ac)
 	{
-		if (ft_checkint(av[i]) == 1)
+		if ((ac > 1 && av[i][0] == '\0') || ft_checkint(av[i]) == 1)
 			return (1);
 		content = malloc(sizeof(t_content));
 		if (!content)
