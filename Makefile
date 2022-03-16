@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 16:38:50 by mriant            #+#    #+#              #
-#    Updated: 2022/03/04 15:50:47 by mriant           ###   ########.fr        #
+#    Updated: 2022/03/16 11:41:52 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,12 @@ SRCS = ${addprefix srcs/, \
 	test.c \
 	utils.c}
 BONUS_SRCS = ${addprefix srcs/, \
-	main_bonus.c}
+	main_bonus.c \
+	parsing_args_bonus.c \
+	parsing_ops_bonus.c \
+	push_swap_bonus.c \
+	utils_bonus.c \
+	test.c}
 GNL_SRCS = ${addprefix gnl/, \
 	get_next_line.c \
 	get_next_line_utils.c}
@@ -73,6 +78,7 @@ clean:
 
 fclean: clean
 	rm -rf ${NAME}
+	rm -rf ${BONUS_NAME}
 	make -s -C libft fclean
 
 re: fclean all
