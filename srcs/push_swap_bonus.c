@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 11:40:57 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/16 13:24:42 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/21 14:17:00 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ void	ft_do_op(t_list **a_list, t_list **b_list, char *s)
 		ft_push(b_list, a_list);
 	if (ft_strcmp(s, "pb\n") == 0)
 		ft_push(a_list, b_list);
-	if (ft_strcmp(s, "ra\n") == 0 || ft_strcmp(s, "rr") == 0)
+	if (ft_strcmp(s, "ra\n") == 0 || ft_strcmp(s, "rr\n") == 0)
 		ft_rotate(a_list);
-	if (ft_strcmp(s, "rb\n") == 0 || ft_strcmp(s, "rr") == 0)
+	if (ft_strcmp(s, "rb\n") == 0 || ft_strcmp(s, "rr\n") == 0)
 		ft_rotate(b_list);
-	if (ft_strcmp(s, "rra\n") == 0 || ft_strcmp(s, "rrr") == 0)
+	if (ft_strcmp(s, "rra\n") == 0 || ft_strcmp(s, "rrr\n") == 0)
 		ft_rrotate(a_list);
-	if (ft_strcmp(s, "rrb\n") == 0 || ft_strcmp(s, "rrr") == 0)
+	if (ft_strcmp(s, "rrb\n") == 0 || ft_strcmp(s, "rrr\n") == 0)
 		ft_rrotate(b_list);
 }
