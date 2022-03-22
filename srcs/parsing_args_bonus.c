@@ -6,7 +6,7 @@
 /*   By: mriant <mriant@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:39:54 by mriant            #+#    #+#             */
-/*   Updated: 2022/03/16 14:00:27 by mriant           ###   ########.fr       */
+/*   Updated: 2022/03/22 11:26:25 by mriant           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	ft_checkinput(int ac, char **av, t_list **pile)
 			return (1);
 		content->value = ft_atoi(av[i]);
 		if (ft_checkdobble(content->value, pile) == 1)
+		{
+			free(content);
 			return (1);
+		}
 		next = ft_lstnew(content);
 		if (!next)
 			return (1);
