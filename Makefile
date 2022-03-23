@@ -6,7 +6,7 @@
 #    By: mriant <mriant@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 16:38:50 by mriant            #+#    #+#              #
-#    Updated: 2022/03/16 11:41:52 by mriant           ###   ########.fr        #
+#    Updated: 2022/03/23 10:52:05 by mriant           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,9 @@ build/%.o: gnl/%.c
 	@mkdir -p build
 	${CC} ${CFLAGS} -c $< -o $@ ${IFLAGS} ${BONUS_IFLAGS}
 
-bonus: ${LIBFT} ${BONUS_OBJS} ${GNL_OBJS}
+bonus: ${BONUS_NAME}
+
+${BONUS_NAME}: ${LIBFT} ${BONUS_OBJS} ${GNL_OBJS}
 	${CC} ${CFLAGS} ${BONUS_OBJS} ${GNL_OBJS} -o ${BONUS_NAME} ${LFLAGS}
 
 all: ${NAME}
